@@ -13,7 +13,6 @@ type formData = {
 };
 
 function Contact() {
-  /* console.log(process.env.NEXT_PUBLIC_FORM_SUBMIT_URL) */
   const {
     register,
     handleSubmit,
@@ -34,7 +33,6 @@ function Contact() {
       email: data.email,
       message: data.message,
     };
-    /* console.log(data) */
 
     try {
       const url = process.env.NEXT_PUBLIC_FORM_SUBMIT_URL;
@@ -43,9 +41,6 @@ function Contact() {
       }
 
       await axios.post(url, userInfo);
-      /* setTimeout(() => {
-            console.log("Form submitted successfully:", userInfo);
-         }, 5000); */
 
       toast.success("Your message has been sent");
       reset({
@@ -59,10 +54,6 @@ function Contact() {
     }
   };
 
-  /* const name = "tejrdevcode";
-   const domain = "gmail";
-   const tld = "com";
-   const email = name + "@" + domain + "." + tld; */
   return (
     <>
       <div

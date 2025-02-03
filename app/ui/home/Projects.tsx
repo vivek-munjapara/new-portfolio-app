@@ -1,14 +1,10 @@
-import wpacfpro from "@/public/projects/mini/acfwpthumb.jpg";
-import bootstrap from "@/public/projects/mini/bootstrapvibethumb.jpg";
-import html from "@/public/projects/mini/carehtmlthumb.jpg";
-import nextdeshboard from "@/public/projects/mini/deshboardnextjsthumb.jpg";
-import react_gardner from "@/public/projects/mini/reactgardner.jpg";
-import sass from "@/public/projects/mini/sassbluetiqthumb.jpg";
-import tailwind from "@/public/projects/mini/tailwindburger.jpg";
-import teahouse from "@/public/projects/mini/teahousethumb.jpg";
+import donation from "@/public/projects/Donation-Crowdfunding.png";
+import donationReward from "@/public/projects/donation-reward.png";
+import imagegellary from "@/public/projects/Image-Gallery.png";
+import meetingRoomz from "@/public/projects/Meetings-roomz.png";
+import portfolioApp from "@/public/projects/portfolio-app.png";
 import Image from "next/image";
 
-import { BiLogoTypescript } from "react-icons/bi";
 import {
   FaBootstrap,
   FaCss3Alt,
@@ -16,17 +12,15 @@ import {
   FaGithubAlt,
   FaReact,
   FaSass,
-  FaWordpress,
+  FaStripe,
 } from "react-icons/fa";
 import { FaHtml5 } from "react-icons/fa6";
+import { IoLogoJavascript } from "react-icons/io5";
 import {
-  SiGraphql,
-  SiJquery,
-  SiNetlify,
+  SiMui,
   SiNextdotjs,
-  SiPhp,
+  SiReactquery,
   SiTailwindcss,
-  SiVercel,
 } from "react-icons/si";
 
 interface CardItem {
@@ -43,79 +37,87 @@ const Projects = () => {
   const cardItem: CardItem[] = [
     {
       id: 1,
-      logo: teahouse,
-      name: "Teahouse Next js Project",
-      url: "https://nextjstea.vercel.app/",
-      github: "https://github.com/tejdevcode/nextjstea",
-      codeurl: "https://github1s.com/tejdevcode/nextjstea",
-      tags: [
-        "NextJS",
-        "ReactJS",
-        "AppRouter",
-        "HTML",
-        "CSS",
-        "Vercel",
-        "GitHub",
-      ],
+      logo: meetingRoomz,
+      name: "Meeting Roomz",
+      url: "https://dev.meetingroomz.com/",
+      // github: "https://github.com/tejdevcode/nextjstea",
+      // codeurl: "https://github1s.com/tejdevcode/nextjstea",
+      tags: ["NextJS", "React-Query", "SCSS", "Stripe", "GitHub"],
       tachstack: [
         <SiNextdotjs />,
-        <FaReact />,
+        <FaSass />,
+        <SiReactquery />,
+        <SiMui />,
+        <FaStripe />,
         <FaHtml5 />,
         <FaCss3Alt />,
-        <SiVercel />,
         <FaGithub />,
       ],
     },
     {
       id: 2,
-      logo: react_gardner,
-      name: "ReactGarden React js project",
-      url: "https://reactwptype.netlify.app/",
-      github: "https://github.com/tejdevcode/reactwptype",
-      codeurl: "https://github1s.com/tejdevcode/reactwptype",
-      tags: [
-        "ReactJS",
-        "WordPress",
-        "WPGraphQL",
-        "WPACF",
-        "HTML",
-        "CSS",
-        "Netlify",
-        "GitHub",
-      ],
+      logo: donation,
+      name: "Donation Go Fund",
+      url: "https://demo.gofundestates.com/",
+      // github: "https://github.com/tejdevcode/reactwptype",
+      // codeurl: "https://github1s.com/tejdevcode/reactwptype",
+      tags: ["ReactJS", "Bootstrap", "HTML", "SCSS", "Stripe", "GitHub"],
       tachstack: [
         <FaReact />,
-        <BiLogoTypescript />,
-        <FaWordpress />,
-        <SiGraphql />,
+        <FaSass />,
+        <FaBootstrap />,
+        <FaStripe />,
         <FaHtml5 />,
         <FaCss3Alt />,
-        <SiNetlify />,
+        <FaGithub />,
       ],
     },
     {
       id: 3,
-      logo: nextdeshboard,
-      name: "nextDeshboard nextjs15 project",
-      url: "https://nextjsdashapp.vercel.app/",
-      github: "https://github.com/tejdevcode/nextjsdashboard",
-      codeurl: "https://github1s.com/tejdevcode/nextjsdashboard",
-      tags: [
-        "NextJS15",
-        "ReactJS",
-        "AppRouter",
-        "HTML",
-        "CSS",
-        "Vercel",
-        " NeonPostgres",
-        "GitHub",
-      ],
+      logo: donationReward,
+      name: "Donation Reward",
+      url: "https://reward.gofundestates.com/",
+      // github: "https://github.com/tejdevcode/nextjsdashboard",
+      // codeurl: "https://github1s.com/tejdevcode/nextjsdashboard",
+      tags: ["ReactJS", "Tailwind", "HTML", "SCSS", "Stripe", "GitHub"],
       tachstack: [
-        <SiNextdotjs />,
         <FaReact />,
+        <FaSass />,
+        <SiTailwindcss />,
+        <FaStripe />,
         <FaHtml5 />,
         <FaCss3Alt />,
-        <SiVercel />,
+        <FaGithub />,
+      ],
+    },
+    {
+      id: 4,
+      logo: portfolioApp,
+      name: "Portfolio App",
+      url: "https://vivek-portfolio-060424.netlify.app/",
+      github: "https://github.com/vivek-munjapara/portfolio-app",
+      codeurl: "https://github1s.com/vivek-munjapara/portfolio-app",
+      tags: ["ReactJS", "Bootstrap", "HTML", "CSS", "Redux", "GitHub"],
+      tachstack: [
+        <FaReact />,
+        <FaHtml5 />,
+        <FaBootstrap />,
+        <FaCss3Alt />,
+        <FaGithub />,
+      ],
+    },
+    {
+      id: 5,
+      logo: imagegellary,
+      name: "Image Gellary",
+      url: "https://vivek-portfolio-060424.netlify.app/",
+      github: "https://github.com/vivek-munjapara/Image-Gallery",
+      codeurl: "https://github1s .com/vivek-munjapara/Image-Gallery",
+      tags: ["Java Script", "HTML", "CSS", "GitHub"],
+      tachstack: [
+        <IoLogoJavascript />,
+        <FaHtml5 />,
+        <FaCss3Alt />,
         <FaGithub />,
       ],
     },
@@ -172,12 +174,14 @@ const Projects = () => {
               </div>
 
               <div className=" px-2 sm:py-4 flex justify-center sm:absolute sm:-bottom-36 sm:left-0 group-hover:bottom-0 transition-all duration-300 z-10 mx-auto w-full">
-                <a
-                  className="bg-blue-500 hover:bg-blue-700 text-white px-3 py-1 rounded m-1 leading-tight text-center"
-                  href={item?.github}
-                >
-                  Source code
-                </a>
+                {item?.github && (
+                  <a
+                    className="bg-blue-500 hover:bg-blue-700 text-white px-3 py-1 rounded m-1 leading-tight text-center"
+                    href={item?.github}
+                  >
+                    Source code
+                  </a>
+                )}
                 <a
                   className="bg-red-500 hover:bg-red-700 text-white px-3 py-1 rounded m-1 "
                   href={item?.url}
@@ -185,14 +189,16 @@ const Projects = () => {
                 >
                   SiteDemo
                 </a>
-                <a
-                  className=" text-black sm:text-white dark:text-slate-100 px-1 py-1 rounded mx-1 mt-2 text-xl"
-                  href={item?.codeurl}
-                  target="_blank"
-                  title="Code"
-                >
-                  <FaGithubAlt />
-                </a>
+                {item?.codeurl && (
+                  <a
+                    className=" text-black sm:text-white dark:text-slate-100 px-1 py-1 rounded mx-1 mt-2 text-xl"
+                    href={item?.codeurl}
+                    target="_blank"
+                    title="Code"
+                  >
+                    <FaGithubAlt />
+                  </a>
+                )}
               </div>
             </div>
           ))}
