@@ -1,10 +1,11 @@
 "use client";
-import axios from "axios";
+import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { FaEnvelope } from "react-icons/fa";
 import Loaderatom from "@/app/ui/loder/Loaderatom";
 import EmailComponent from "./EmailComponent";
+import emailjs from "@emailjs/browser";
 
 type formData = {
   name: string;
@@ -16,10 +17,9 @@ function Contact() {
   const {
     register,
     handleSubmit,
-    watch,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm({
+  } = useForm<formData>({
     defaultValues: {
       name: "",
       email: "",
@@ -28,29 +28,31 @@ function Contact() {
   });
 
   const onSubmit: SubmitHandler<formData> = async data => {
-    const userInfo = {
-      name: data.name,
-      email: data.email,
-      message: data.message,
-    };
-
     try {
-      const url = process.env.NEXT_PUBLIC_FORM_SUBMIT_URL;
-      if (!url) {
-        throw new Error("The form submit URL is not defined.");
+      const serviceId = process.env.NEXT_PUBLIC_EMAIL_JS_SERVICE_ID;
+      const templateId = process.env.NEXT_PUBLIC_EMAIL_JS_TEMPLATE_ID;
+      const publicKey = process.env.NEXT_PUBLIC_EMAIL_JS_PUBLIC_KEY;
+
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error("EmailJS configuration is missing");
       }
 
-      await axios.post(url, userInfo);
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: data.name,
+          from_email: data.email,
+          message: data.message,
+        },
+        publicKey
+      );
 
-      toast.success("Your message has been sent");
-      reset({
-        name: "",
-        email: "",
-        message: "",
-      });
+      toast.success("Your message has been sent!");
+      reset();
     } catch (error) {
-      console.log(error);
-      toast.error("Something went wrong");
+      console.error(error);
+      toast.error("Failed to send message. Please try again.");
     }
   };
 
@@ -58,7 +60,7 @@ function Contact() {
     <>
       <div
         id="Contact"
-        className="max-w-screen-2xl container mx-auto px-4 md:px-20 my-16 "
+        className="max-w-screen-2xl container mx-auto px-4 md:px-20 my-16"
       >
         <h2 className="text-3xl font-bold mb-4">Contact me</h2>
         <div className="flex flex-wrap gap-4">
@@ -77,11 +79,9 @@ function Contact() {
             </div>
           </div>
           <div className="contactitem w-full sm:w-[calc(100%-340px)]">
-            <div className=" flex flex-col">
+            <div className="flex flex-col">
               <form
                 onSubmit={handleSubmit(onSubmit)}
-                // action="https://getform.io/f/raeqjora"
-                // method="POST"
                 className="bg-slate-200 dark:bg-slate-600 px-4 py-3 sm:px-8 sm:py-6 rounded-xl w-full relative"
               >
                 {isSubmitting && (
@@ -96,7 +96,7 @@ function Contact() {
                   </label>
                   <input
                     {...register("name", { required: true })}
-                    className="shadow rounded-lg appearance-none border  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="shadow rounded-lg appearance-none border py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="name"
                     name="name"
                     type="text"
@@ -111,15 +111,22 @@ function Contact() {
                     Email Address
                   </label>
                   <input
-                    {...register("email", { required: true })}
-                    className="shadow rounded-lg appearance-none border  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    {...register("email", {
+                      required: true,
+                      pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    })}
+                    className="shadow rounded-lg appearance-none border py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="email"
                     name="email"
-                    type="text"
+                    type="email"
                     placeholder="Enter your email address"
                   />
                   {errors.email && (
-                    <span className="text-red-600">This field is required</span>
+                    <span className="text-red-600">
+                      {errors.email.type === "required"
+                        ? "This field is required"
+                        : "Invalid email address"}
+                    </span>
                   )}
                 </div>
                 <div className="flex flex-col mb-4">
@@ -128,7 +135,7 @@ function Contact() {
                   </label>
                   <textarea
                     {...register("message", { required: true })}
-                    className="shadow rounded-lg appearance-none border  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="shadow rounded-lg appearance-none border py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="message"
                     name="message"
                     placeholder="Enter your Query"
@@ -137,7 +144,6 @@ function Contact() {
                     <span className="text-red-600">This field is required</span>
                   )}
                 </div>
-                <input type="hidden" name="_captcha" value="true" />
                 <button
                   type="submit"
                   className="bg-black text-white rounded-xl px-3 py-2 hover:bg-slate-700 duration-300"
